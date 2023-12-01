@@ -1,0 +1,40 @@
+cabal-version: 2.2
+
+-- This file has been generated from package.yaml by hpack version 0.35.1.
+--
+-- see: https://github.com/sol/hpack
+
+name:           pullpush
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/oquechy/pullpush#readme>
+homepage:       https://github.com/oquechy/pullpush#readme
+bug-reports:    https://github.com/oquechy/pullpush/issues
+author:         Lisa Vasilenko
+maintainer:     elizaveta.vasilenko@imdea.org
+copyright:      2023 Lisa Vasilenko
+license:        BSD-3-Clause
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    CHANGELOG.md
+
+source-repository head
+  type: git
+  location: https://github.com/oquechy/pullpush
+
+library
+  exposed-modules:
+      PullPush
+  other-modules:
+      Paths_pullpush
+  autogen-modules:
+      Paths_pullpush
+  hs-source-dirs:
+      src
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -fplugin=LiquidHaskell
+  build-depends:
+      base >=4.7 && <5
+    , liquid-prelude
+    , liquidhaskell
+  default-language: Haskell2010
