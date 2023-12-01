@@ -2,6 +2,9 @@ module PullPush (Pull, Push, pair, split, unpair, append) where
 
 -- Pull
 
+-- Pull l ixf is an array xs of length l where xs[i] is given by index function ixf i.  
+-- TODO: domain of ixf has to be [0..l-1], how to express in LH?
+{- data Pull a = Pull Int (Int -> a) @-}
 data Pull a = Pull Int (Int -> a)
 
 instance Functor Pull where
@@ -18,6 +21,7 @@ split (Pull l ixf) = (Pull l1 ixf, Pull l2 ixf')
 
 -- Push
 
+{-@ data Push a = Push Int ((Int -> a -> IO ()) -> IO ()) @-}
 data Push a = Push Int ((Int -> a -> IO ()) -> IO ())
 
 instance Functor Push where
