@@ -1,10 +1,18 @@
-module PullPush (Pull, Push, pair, split, unpair, append) where
+module PullPush
+  ( Pull(..)
+  , Push(..)
+  , pair
+  , split
+  , unpair
+  , append
+  )
+where
 
 -- Pull
 
 -- Pull l ixf is an array xs of length l where xs[i] is given by index function ixf i.  
--- TODO: domain of ixf has to be [0..l-1], how to express in LH?
-{-@ data Pull a = Pull Int (Int -> a) @-}
+-- Domain of ixf is [0..l-1], verified by Liquid Haskell signature.
+{-@ data Pull a = Pull {l :: Int, ixf :: {i:Int | i < l} -> a } @-}
 data Pull a = Pull Int (Int -> a)
 
 instance Functor Pull where
@@ -21,7 +29,10 @@ split (Pull l ixf) = (Pull l1 ixf, Pull l2 ixf')
 
 -- Push
 
-{-@ data Push a = Push Int ((Int -> a -> IO ()) -> IO ()) @-}
+-- Push l ixf is an array xs of length l which has a "printing" function ixf that takes as an argument an element-wise printing function f.
+-- At exactly l points ixf f prints non-empty result.
+-- TODO: how to verify it with LH?
+{-@ data Push a = Push {k :: Int, ixg :: (i:Int -> a -> IO ()) -> IO ()} @-}
 data Push a = Push Int ((Int -> a -> IO ()) -> IO ())
 
 instance Functor Push where
